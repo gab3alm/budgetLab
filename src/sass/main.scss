@@ -8,7 +8,102 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+@mixin fontColorGradient{
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#7ab660+0,7bc180+51,195341+73 */
+  background: #7ab660; /* Old browsers */
+  background: -moz-linear-gradient(-45deg, #7ab660 0%, #7bc180 51%, #195341 73%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(-45deg, #7ab660 0%,#7bc180 51%,#195341 73%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(135deg, #7ab660 0%,#7bc180 51%,#195341 73%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7ab660', endColorstr='#195341',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+$main-font: 'Lobster';
+$sec-font: 'Lato';
+
+.home-page{
+  height: 100vh;
+}
+
+%basic-font{
+  @include fontColorGradient;
+}
+
+//---------------------------------
+//BRAND NAME RULES
+//---------------------------------
+.brand-name{
+  @extend %basic-font;
+  text-transform: capitalize;
+  font-family: $main-font;
+  font-size: 5.5em;
+}
+
+//---------------------------------
+//INFO FIELDS RULES
+//---------------------------------
+.info-field{
+  text-transform: capitalize;
+  font-family: $sec-font;
+  font-size: 1.3em;
+  margin-bottom: 10px;
+  .label{
+    @extend %basic-font;
+  }
+  .content{
+    color:rgba(0,0,0,.85);
+  }
+}
+
+//---------------------------------
+//ACTION BUTTON RULES
+//---------------------------------
+.action{
+  margin-bottom: 10px;
+  height: 40px;
+  .input{
+    vertical-align: middle;
+    background-color: #EDEDED;
+    border: none;
+    border-radius: 20px 0 0 20px;
+    height: 100%;
+    text-align:center;
+  }
+  .input:focus{
+    outline: none;
+  }
+  .btn-action{
+    height: 100%;
+    border-radius: 20px;
+    text-transform: capitalize;
+    font-family: $sec-font;
+    min-width: 120px;
+    position: relative;
+    border:0;
+  }
+  .btn-action::before{
+    vertical-align: middle;
+    content:"";
+    width: 50%;
+    height: 100%;
+    background-color: #EDEDED;
+    position: absolute;
+    top:0;
+    left:-1%;
+    z-index:-1;
+  }
+}
+
+//---------------------------------
+//FOOTER RULES
+//---------------------------------
+.footer-branding{
+  @extend %basic-font;
+  font-family: $sec-font;
+  font-size: 1.2em;
+  position:absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 0);
 }
