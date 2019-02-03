@@ -1,34 +1,28 @@
 {
-  "name": "greenify",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "bootstrap": "^4.2.1",
-    "jquery": "^3.3.1",
-    "node-sass": "^4.11.0",
-    "popper.js": "^1.14.6",
-    "react": "^16.7.0",
-    "react-dom": "^16.7.0",
-    "react-redux": "^6.0.0",
-    "react-scripts": "2.1.2",
-    "reactstrap": "^7.0.2",
-    "redux": "^4.0.1",
-    "typeface-lato": "0.0.54",
-    "typeface-lobster": "0.0.54"
-  },
+  "name": "budgetLab",
+  "version": "1.0.0",
+  "description": "A small sample project that simulates a Bank's ATM for withdrawing and depositing money for your account. Now everyone can be a millionaire :)",
+  "main": "index.js",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "client": "cd client && npm install && npm run start",
+    "server": "nodemon --exec babel-node server/index.js",
+    "start": "concurrently 'npm run client' 'npm run server'",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "eslintConfig": {
-    "extends": "react-app"
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "dotenv": "^6.2.0",
+    "express": "^4.16.4"
   },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ]
+  "devDependencies": {
+    "concurrently": "^4.1.0",
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.2.2",
+    "@babel/node": "^7.2.2",
+    "@babel/preset-env": "^7.3.1",
+    "nodemon": "^1.18.9"
+  }
 }

@@ -1,9 +1,26 @@
-## Greenify
-A small sample project that simulates a Bank's ATM for withdrawing and depositing money for your account.
-Now everyone can be a millionaire :)
+## BudgetLab
+BudgetLab keeps your finances in check.
 
-### Technology
-This project is a sample project meant to show the basic usage of React and redux.
+## Technology
+This project makes use of the following technologies.
+
+### Frontend
 - React
 - Redux
 - SASS
+
+### Backend
+- Express JS
+
+## Setup
+First things first, lets add your `.env` file in the root of the project.
+```
+API_PORT=5000
+```
+
+Once your `.env` is ready, then you can run the following in your console. 
+```
+npm install
+npm start
+```
+Your backend and frontend will be available in different ports.
