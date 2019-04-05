@@ -1,15 +1,6 @@
-import {GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLList} from 'graphql';
-import {account, createDummyAccount} from './account';
-
-const createDummyPayee = ()=>{
-  return {
-    id: "hk1231uib3nmb12i3yts",
-    name: "sample payee",
-    income_period: "semi-monthly",
-    income_amount: 2000,
-    accounts: [createDummyAccount()]
-  };
-};
+import {GraphQLObjectType, GraphQLString, GraphQLInt} from 'graphql';
+import GraphQLJSON from 'graphql-type-json';
+import {getPayee} from '../resolvers/payee';
 
 const payee = new GraphQLObjectType({
   name: 'payee',
@@ -18,19 +9,17 @@ const payee = new GraphQLObjectType({
     name: {type: GraphQLString},
     income_period: {type: GraphQLString},
     income_amount: {type: GraphQLInt},
-    accounts: {type: GraphQLList(account)}
+    accounts: {type: GraphQLJSON}
     }
 });
 
 const payee_information = {
   type: payee,
-  resolve(){
-    return createDummyPayee();
-  }
+  args: {id: {type: GraphQLInt}},
+  resolve: getPayee
 };
 
 export {
   payee,
-  payee_information,
-  createDummyPayee
+  payee_information
 };

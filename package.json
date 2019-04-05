@@ -17,7 +17,10 @@
     "dotenv": "^6.2.0",
     "express": "^4.16.4",
     "express-graphql": "^0.7.1",
-    "graphql": "^14.1.1"
+    "graphql": "^14.1.1",
+    "graphql-type-json": "^0.2.4",
+    "pg": "^7.9.0",
+    "winston": "^3.2.1"
   },
   "devDependencies": {
     "concurrently": "^4.1.0",

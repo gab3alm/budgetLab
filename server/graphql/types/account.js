@@ -11,7 +11,7 @@ const createDummyAccount = ()=>{
     period_payment: 240.21,
     interest: 3.25,
     description: ":Leisure expending account",
-    payments_made: [createDummyPayment()]
+    payments_made: [""]
   };
 };
 
@@ -26,7 +26,7 @@ const account = new GraphQLObjectType({
     period_payment: {type: GraphQLFloat},
     interest: {type: GraphQLFloat},
     description: {type: GraphQLString},
-    payments_made: {type: GraphQLList(payment)}
+    payments_made: {type: GraphQLList(GraphQLString)}
   }
 });
 
