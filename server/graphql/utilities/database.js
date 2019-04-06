@@ -18,8 +18,4 @@ const query = async (statement, values, connection = pool)=>{
   }
 };
 
-//
-
-
-
 export {pool, query};

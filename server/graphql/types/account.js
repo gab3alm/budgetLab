@@ -1,5 +1,4 @@
 import {GraphQLObjectType, GraphQLString, GraphQLFloat, GraphQLInt, GraphQLList} from 'graphql';
-import {payment, createDummyPayment} from './payment';
 
 const createDummyAccount = ()=>{
   return {
@@ -31,7 +30,7 @@ const account = new GraphQLObjectType({
 });
 
 const account_information = {
-  type: payment,
+  type: account,
   resolve(){
     return createDummyAccount();
   }
