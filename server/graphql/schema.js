@@ -1,9 +1,10 @@
 import {GraphQLSchema,  GraphQLObjectType} from 'graphql';
 import {payee_information} from './types/payee';
 import paymentInformation from './resolvers/payment';
-import {account_information} from './types/account';
-import {addPayeeRecord} from "./mutations/payee";
+import accountInformation from './resolvers/account';
+import addPayeeRecord from "./mutations/payee";
 import addPaymentRecord from './mutations/payment';
+import addAccountRecord from "./mutations/account";
 
 const schema = new GraphQLSchema({
   query: new GraphQLObjectType({
@@ -11,14 +12,15 @@ const schema = new GraphQLSchema({
     fields:{
       payee: payee_information,
       payment: paymentInformation,
-      account: account_information
+      account: accountInformation
     }
   }),
   mutation: new GraphQLObjectType({
     name: "RootMutationType",
     fields:{
       createPayee: addPayeeRecord,
-      createPayment: addPaymentRecord
+      createPayment: addPaymentRecord,
+      createAccount: addAccountRecord
     }
   })
 });

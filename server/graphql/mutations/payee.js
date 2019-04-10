@@ -36,4 +36,4 @@ const addPayeeRecord = {
   resolve: addPayee
 };
 
-export {addPayeeRecord};
+export default addPayeeRecord;

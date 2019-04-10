@@ -1,4 +1,5 @@
 import {GraphQLObjectType, GraphQLString, GraphQLFloat, GraphQLInt, GraphQLList} from 'graphql';
+import GraphQLJSON from 'graphql-type-json';
 
 const createDummyAccount = ()=>{
   return {
@@ -25,19 +26,8 @@ const account = new GraphQLObjectType({
     period_payment: {type: GraphQLFloat},
     interest: {type: GraphQLFloat},
     description: {type: GraphQLString},
-    payments_made: {type: GraphQLList(GraphQLString)}
+    payments_made: {type: GraphQLJSON}
   }
 });
 
-const account_information = {
-  type: account,
-  resolve(){
-    return createDummyAccount();
-  }
-};
-
-export {
-  account_information,
-  createDummyAccount,
-  account
-};
+export default account;
