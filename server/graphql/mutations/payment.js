@@ -4,6 +4,19 @@ import {GraphQLFloat, GraphQLString} from "graphql";
 import logger from '../../log';
 import assert from 'assert';
 
+const removePayment = async (id)=>{
+  try {
+    assert.notStrictEqual(id, undefined, `payment id cannot be undefined`);
+    let {rows, rowCount} = await query("DELETE FROM payments WHERE id = $1 RETURNING id", [id]);
+    assert.notStrictEqual(rowCount, 0, `payment with id '${id}' does not exists in database`);
+    assert.strictEqual(rowCount, 1, 'more than one payment record was removed');
+    logger.log("info", `successfully removed payment with id '${id}'`);
+    return rows[0];
+  }catch (exception){
+    logger.log("error", `failed to remove payment '${id}'. Reason: ${exception.message}`);
+  }
+};
+
 const addPayment = async (obj, args, context, info)=>{
   try {
     let {account, date, owner, amount, pending_balance} = args;
@@ -32,4 +45,4 @@ const addPaymentRecord = {
   resolve: addPayment
 };
 
-export default addPaymentRecord;
+export {addPaymentRecord, removePayment};

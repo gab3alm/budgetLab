@@ -3,8 +3,8 @@ import {payee_information} from './types/payee';
 import paymentInformation from './resolvers/payment';
 import accountInformation from './resolvers/account';
 import addPayeeRecord from "./mutations/payee";
-import addPaymentRecord from './mutations/payment';
-import addAccountRecord from "./mutations/account";
+import {addPaymentRecord} from './mutations/payment';
+import {addAccountRecord, removeAccountRecord} from "./mutations/account";
 
 const schema = new GraphQLSchema({
   query: new GraphQLObjectType({
@@ -20,7 +20,8 @@ const schema = new GraphQLSchema({
     fields:{
       createPayee: addPayeeRecord,
       createPayment: addPaymentRecord,
-      createAccount: addAccountRecord
+      createAccount: addAccountRecord,
+      removeAccount: removeAccountRecord
     }
   })
 });

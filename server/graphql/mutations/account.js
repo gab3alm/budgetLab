@@ -1,9 +1,30 @@
 import account from '../types/account';
-import {GraphQLFloat, GraphQLString} from "graphql";
+import {GraphQLFloat, GraphQLInt, GraphQLString} from "graphql";
 import GraphQLJSON from "graphql-type-json";
 import {query} from '../utilities/database';
 import assert from 'assert';
 import logger from '../../log';
+import {removePayment} from "./payment";
+
+const removeAccount = async (obj, args, context, info)=>{
+  try {
+    let {id} = args;
+    assert.notStrictEqual(id, undefined, "account id cannot be undefined");
+    let {rows, rowCount}= await query("DELETE FROM accounts WHERE id = $1 RETURNING id, payments_made", [id]);
+    assert.notStrictEqual(rowCount, 0, `account record '${id} does not exist in database`);
+    assert.strictEqual(rowCount, 1, "more than one record was deleted from the database");
+    logger.log("info", `Successfully removed account record '${id}'`);
+    const removedAccountPayments = rows[0].payments_made.payments;
+    removedAccountPayments.forEach(async (paymentId)=>{
+      assert.notStrictEqual(paymentId, undefined, `payment ID field cannot be undefined`);
+      let {id:removedPaymentId} = await removePayment(paymentId);
+      assert.notStrictEqual(removedPaymentId, undefined, "payment ID of removed record cannot be undefined");
+    });
+    return rows[0];
+  }catch (exception){
+    logger.log("error", `Failed while removing the account '${args.id}'. Reason: ${exception.message}`);
+  }
+};
 
 const addAccount = async (obj, args, context, info)=>{
   try {
@@ -37,4 +58,12 @@ const addAccountRecord = {
   resolve: addAccount
 };
 
-export default addAccountRecord;
+const removeAccountRecord = {
+  type: account,
+  args: {
+    id: {type: GraphQLInt},
+  },
+  resolve: removeAccount
+};
+
+export {addAccountRecord, removeAccountRecord};
